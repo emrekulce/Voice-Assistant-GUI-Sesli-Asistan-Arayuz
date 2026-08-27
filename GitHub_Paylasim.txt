@@ -1,0 +1,244 @@
+# 🎙️ Python AI Voice Assistant Floating HUD (Overlay GUI)
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg?style=for-the-badge)]()
+[![GUI](https://img.shields.io/badge/GUI-Tkinter%2060%20FPS-purple.svg?style=for-the-badge)]()
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Standard%20Library%20Only-orange.svg?style=for-the-badge)]()
+
+Kendi yapay zeka sesli asistanını (AI Voice Assistant) geliştiren geliştiriciler için tasarlanmış; **modern, şeffaf (glassmorphic), 60 FPS animasyonlu ve sürükle-bırak destekli kayan arayüz (Floating HUD Overlay)** şablonu.
+
+Tamamen **Python standart kütüphaneleriyle** geliştirilmiştir. Çoklu işlemci mimarisi (`multiprocessing`) sayesinde asistanınız arka planda ses kaydederken, LLM (Büyük Dil Modeli) düşünürken veya ses sentezlerken (TTS) arayüz **asla donmaz (0ms lag)**.
+
+---
+
+## 📸 Ekran Görüntüleri & Önizleme
+
+| 1. Dinleme Durumu (Listening) | 2. Kullanıcı Konuşuyor (User Speaking) | 3. İşlem Yapılıyor (Processing) |
+| :---: | :---: | :---: |
+| ![Dinliyor](1.png) | ![Kullanıcı Konuşuyor](2.png) | ![Düşünüyor](3.png) |
+| *Nefes alan nabız halkası* | *Canlı RMS mikrofon equalizer'ı* | *Orbital dönen düşünme küresi* |
+
+| 4. Asistan Konuşuyor (Assistant Speaking) | 5. Uyku / Hata Modları (Sleeping / Error) |
+| :---: | :---: |
+| ![Asistan Konuşuyor](4.png) | ![Uyku Modu](5.png) |
+| *9-Bantlı Aurora ses spektrumu* | *Dingin uyku & kırmızı uyarı ikonları* |
+
+---
+
+## ✨ Öne Çıkan Özellikler
+
+- 💎 **Modern Glassmorphic Tasarım:** Şeffaf pencereler, yumuşak yuvarlatılmış köşeler, durum rozetleri (pill badge) ve neon ışıma efektleri.
+- ⚡ **Zero-Lag & 60 FPS (İzole Süreç):** GUI, arka plandaki bağımsız bir süreçte (`multiprocessing`) çalışır. API istekleriniz veya ağır ses modelleriniz arayüzün akıcılığını etkilemez.
+- 🔄 **6 Farklı Asistan Durumu:**
+  1. `listening`: Standby / Uyandırma kelimesi (Wake-word) bekleme.
+  2. `user_speaking`: Kullanıcı mikrofon girişi aktif (Equalizer dalgaları).
+  3. `processing`: LLM çıkarımı, API istekleri veya araç (tool) çalıştırma.
+  4. `assistant_speaking`: TTS ses çıkışı (Aurora spektrumu).
+  5. `sleeping`: Uyku / Sessiz bekleme modu.
+  6. `error`: Hata / Bağlantı zaman aşımı uyarısı.
+- 🔊 **Canlı Ses Şiddeti (RMS) Desteği:** Mikrofon veya hoparlör ses genliğine göre gerçek zamanlı büyüyüp küçülen dinamik görselleştirici (`calculate_rms` dahildir).
+- 💬 **Canlı Altyazı & Durum Rozeti:** Kullanıcının söylediği sözleri veya o anda çağrılan aracı (örn. `🌦️ Hava Durumu Sorgulanıyor...`) anlık olarak görüntüler.
+- 🖱️ **Taşınabilir & Her Zaman Üstte (Always-on-Top & Draggable):** Ekranın istenilen yerine sürüklenebilir; çift tıklama ile sağ üst köşedeki orijinal konumuna geri döner.
+- 🛠️ **Sıfır Dış Bağımlılık:** Python'ın dahili `tkinter` kütüphanesini kullanır. Ekstra bir GUI kütüphanesi (`PyQt`, `Pygame`, `Kivy` vb.) kurmanıza gerek yoktur.
+- 💻 **Çapraz Platform:** macOS, Windows ve Linux işletim sistemlerinde pencere şeffaflığıyla tam uyumlu çalışır.
+
+---
+
+## 🎯 Hangi Teknolojilerle Birlikte Kullanılabilir?
+
+Bu arayüz herhangi bir ses/yapay zeka kütüphanesiyle tak-çalıştır şeklinde uyumludur:
+
+- **Ses Tanıma (STT):** OpenAI Whisper, Faster-Whisper, Vosk, Google Cloud Speech, AssemblyAI, SpeechRecognition
+- **Yapay Zeka Modelleri (LLM):** Google Gemini Live / 1.5 Pro / Flash, OpenAI GPT-4o / Realtime API, Anthropic Claude, Ollama, DeepSeek
+- **Ses Sentezi (TTS):** ElevenLabs, Edge-TTS, Kokoro-TTS, gTTS, pyttsx3, Coqui-TTS
+
+---
+
+## 🚀 Kurulum
+
+### 1. Depoyu Klonlayın
+```bash
+git clone https://github.com/kullanici-adiniz/ai-voice-assistant-overlay.git
+cd ai-voice-assistant-overlay
+```
+
+### 2. Gereksinimler
+- Python 3.8 veya üzeri.
+- Herhangi bir üçüncü parti kütüphane zorunlu değildir.
+
+*(İsteğe bağlı)* Ses RMS hesaplamalarında yüksek performans için `numpy` kurabilirsiniz:
+```bash
+pip install numpy
+```
+
+*(Linux Kullanıcıları İçin)* Eğer sisteminizde Tkinter kurulu değilse:
+```bash
+sudo apt-get install python3-tk
+```
+
+---
+
+## 🎬 Hızlı Başlangıç (Demo Çalıştırma)
+
+Arayüz animasyonlarını ve tüm durum geçişlerini canlı olarak test etmek için:
+
+```bash
+python assistant_overlay_gui.py
+```
+
+Örnek bir asistan simülasyonunu çalıştırmak için:
+
+```bash
+python example_custom_assistant.py
+```
+
+---
+
+## 💻 Kendi Asistanınıza Entegre Etme
+
+Arayüzü kendi projenize iki kolay yöntemle entegre edebilirsiniz:
+
+### Yöntem 1: `BaseAssistantBridge` ile (Önerilen OOP Yaklaşımı)
+
+Kendi asistan sınıfınızı `BaseAssistantBridge` sınıfından türeterek tüm durum yönetimini olay bazlı (event-driven) yapabilirsiniz:
+
+```python
+import time
+from assistant_overlay_gui import BaseAssistantBridge, start_overlay, OverlayConfig
+
+class MyVoiceAssistant(BaseAssistantBridge):
+    def run_cycle(self):
+        # 1. Dinleme modu
+        self.on_idle("🎙️ Sizi dinliyorum...")
+        time.sleep(1)
+
+        # 2. Kullanıcı konuşmaya başladı
+        self.on_user_speech_start("👤 Kullanıcı konuşuyor...")
+        self.on_user_speech_chunk(audio_rms_volume=0.7, partial_transcript="Bugün hava nasıl?")
+        time.sleep(1.5)
+
+        # 3. LLM / İşlem modu
+        self.on_processing_start("⚙️ Gemini yanıt hazırlıyor...")
+        time.sleep(1.5)
+
+        # 4. Asistan konuşuyor (TTS)
+        self.on_assistant_speech_start(full_response_text="Bugün hava güneşli ve 24 derece.")
+        self.on_assistant_speech_chunk(audio_rms_volume=0.8)
+        time.sleep(2)
+
+        # 5. Beklemeye dön
+        self.on_idle()
+
+if __name__ == "__main__":
+    hud = start_overlay()
+    assistant = MyVoiceAssistant(overlay=hud)
+    try:
+        assistant.run_cycle()
+    finally:
+        hud.stop()
+```
+
+---
+
+### Yöntem 2: `OverlayController` ile Doğrudan Kontrol
+
+Mevcut fonksiyonel asistan kodunuzun içine doğrudan tek satırlık çağrılar ekleyebilirsiniz:
+
+```python
+from assistant_overlay_gui import start_overlay, OverlayConfig
+
+# Arayüzü başlat
+config = OverlayConfig(width=240, height=180, margin_right=30, margin_top=40)
+hud = start_overlay(config=config)
+
+# Durumları tetikle:
+hud.listening("🎙️ Uyandırma kelimesi bekleniyor...")
+hud.user_speaking("👤 Dinleniyor...", volume=0.6, transcript="Bilgisayarı kapat")
+hud.processing("⚙️ Komut yürütülüyor...")
+hud.assistant_speaking("🤖 Yanıt veriliyor...", volume=0.8, transcript="İşlem tamamlandı.")
+hud.sleeping("💤 Uyku moduna geçildi")
+hud.error("⚠️ Mikrofon bağlantı hatası")
+
+# Canlı ses dalgaları besleme (Mikrofon / Hoparlör stream döngüsünde):
+hud.update_user_volume(0.85)       # 0.0 ile 1.0 arası değer
+hud.update_assistant_volume(0.65)  # 0.0 ile 1.0 arası değer
+
+# Kapatma
+hud.stop()
+```
+
+---
+
+## ⚙️ Yapılandırma & Özelleştirme
+
+`OverlayConfig` sınıfı ile arayüzün boyutunu, konumunu, yazı tipini ve renklerini kolayca değiştirebilirsiniz:
+
+```python
+from assistant_overlay_gui import OverlayConfig, start_overlay
+
+custom_config = OverlayConfig(
+    width=260,                   # Genişlik (px)
+    height=190,                  # Yükseklik (px)
+    margin_right=20,             # Ekranın sağından boşluk
+    margin_top=30,               # Ekranın üstünden boşluk
+    border_radius=22,            # Yuvarlak köşe yarıçapı
+    fps=60,                      # Hedef kare hızı
+    always_on_top=True,          # Her zaman üstte kalsın mı?
+    draggable=True,              # Sürüklenebilir olsun mu?
+    title_font_family="Arial",   # Başlık fontu
+    body_font_family="Helvetica" # Açıklama fontu
+)
+
+hud = start_overlay(config=custom_config)
+```
+
+### Özel Renk Teması Tanımlama:
+
+İstediğiniz durum için kendi renk paletinizi tanımlayabilirsiniz:
+
+```python
+custom_themes = {
+    "listening": {
+        "primary": "#00FF88",       # Canlı Yeşil
+        "secondary": "#009944",
+        "glow": "#00FF88",
+        "bg": "#0B1510",
+        "card_border": "#1A3322",
+        "title": "Hazır",
+        "status_text": "🎙️ Dinlemede...",
+        "badge_color": "#00FF88"
+    }
+}
+
+config = OverlayConfig(custom_themes=custom_themes)
+hud = start_overlay(config=config)
+```
+
+---
+
+## 📁 Proje Yapısı
+
+```text
+├── assistant_overlay_gui.py    # 60 FPS Tkinter GUI Motoru, Multiprocessing ve Controller
+├── example_custom_assistant.py # Örnek asistan yaşam döngüsü simülasyonu
+├── 1.png - 5.png               # Durum önizleme ekran görüntüleri
+├── README.md                   # Proje dokümantasyonu
+└── LICENSE                     # MIT Lisansı
+```
+
+---
+
+## 🤝 Katkıda Bulunma
+
+1. Bu depoyu Fork'layın.
+2. Yeni özellik dalınızı oluşturun (`git checkout -b feature/YeniOzellik`).
+3. Değişikliklerinizi commit edin (`git commit -m 'feat: Yeni görselleştirici modu eklendi'`).
+4. Dalınıza push yapın (`git push origin feature/YeniOzellik`).
+5. Bir Pull Request açın.
+
+---
+
+## 📄 Lisans
+
+Bu proje [MIT Lisansı](LICENSE) kapsamında lisanslanmıştır. Kendi ticari veya açık kaynaklı projelerinizde dilediğiniz gibi kullanabilir ve geliştirebilirsiniz.

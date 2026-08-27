@@ -1,0 +1,244 @@
+# 🎙️ Python AI Voice Assistant Floating HUD (Overlay GUI)
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg?style=for-the-badge)]()
+[![GUI](https://img.shields.io/badge/GUI-Tkinter%2060%20FPS-purple.svg?style=for-the-badge)]()
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Standard%20Library%20Only-orange.svg?style=for-the-badge)]()
+
+A modern, transparent (glassmorphic), 60 FPS animated, and draggable **Floating HUD Overlay** template designed for developers building their own AI Voice Assistants.
+
+Built entirely with **Python standard libraries**. Thanks to its multiprocessing architecture (`multiprocessing`), the interface **never freezes (0ms lag)** while your assistant records audio, LLMs (Large Language Models) process thoughts, or text-to-speech (TTS) synthesizes voice in the background.
+
+---
+
+## 📸 Screenshots & Preview
+
+| 1. Listening State | 2. User Speaking | 3. Processing |
+| :---: | :---: | :---: |
+| ![Listening](1.png) | ![User Speaking](2.png) | ![Processing](3.png) |
+| *Breathing pulse ring* | *Live RMS microphone equalizer* | *Orbital spinning thinking sphere* |
+
+| 4. Assistant Speaking | 5. Sleeping / Error Modes |
+| :---: | :---: |
+| ![Assistant Speaking](4.png) | ![Sleep Mode](5.png) |
+| *9-Band Aurora audio spectrum* | *Calm sleep & red alert icons* |
+
+---
+
+## ✨ Key Features
+
+- 💎 **Modern Glassmorphic Design:** Transparent windows, smooth rounded corners, pill status badges, and neon glow effects.
+- ⚡ **Zero-Lag & 60 FPS (Isolated Process):** The GUI runs in an independent background process (`multiprocessing`). Your API requests or heavy AI audio models will never affect UI fluidity.
+- 🔄 **6 Distinct Assistant States:**
+  1. `listening`: Standby / Waiting for wake-word.
+  2. `user_speaking`: User microphone input active (Equalizer waves).
+  3. `processing`: LLM inference, API requests, or tool execution.
+  4. `assistant_speaking`: TTS audio output (Aurora spectrum).
+  5. `sleeping`: Sleep / Quiet standby mode.
+  6. `error`: Error / Connection timeout alert.
+- 🔊 **Live Audio Volume (RMS) Support:** Real-time visualizer that scales dynamically based on mic or speaker amplitude (`calculate_rms` included).
+- 💬 **Live Subtitles & Status Badges:** Displays spoken user transcripts or the currently executed tool (e.g. `🌦️ Checking Weather...`) in real-time.
+- 🖱️ **Always-on-Top & Draggable:** Can be repositioned anywhere on screen; double-clicking resets it to the top-right default position.
+- 🛠️ **Zero External Dependencies:** Built with Python's native `tkinter` library. No need to install external GUI frameworks (`PyQt`, `Pygame`, `Kivy`, etc.).
+- 💻 **Cross-Platform:** Full transparency and window management support across macOS, Windows, and Linux.
+
+---
+
+## 🎯 Compatible Technologies & Integrations
+
+This overlay GUI is plug-and-play compatible with any speech/AI library:
+
+- **Speech-to-Text (STT):** OpenAI Whisper, Faster-Whisper, Vosk, Google Cloud Speech, AssemblyAI, SpeechRecognition
+- **Large Language Models (LLM):** Google Gemini Live / 1.5 Pro / Flash, OpenAI GPT-4o / Realtime API, Anthropic Claude, Ollama, DeepSeek
+- **Text-to-Speech (TTS):** ElevenLabs, Edge-TTS, Kokoro-TTS, gTTS, pyttsx3, Coqui-TTS
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/ai-voice-assistant-overlay.git
+cd ai-voice-assistant-overlay
+```
+
+### 2. Requirements
+- Python 3.8 or higher.
+- No third-party packages required.
+
+*(Optional)* For high-performance audio RMS calculation, install `numpy`:
+```bash
+pip install numpy
+```
+
+*(For Linux Users)* If Tkinter is not installed on your system:
+```bash
+sudo apt-get install python3-tk
+```
+
+---
+
+## 🎬 Quick Start (Running the Demo)
+
+To test the UI animations and all state transitions live:
+
+```bash
+python assistant_overlay_gui.py
+```
+
+To run a sample assistant lifecycle simulation:
+
+```bash
+python example_custom_assistant.py
+```
+
+---
+
+## 💻 Integrating with Your Assistant
+
+You can integrate the overlay into your project using two easy approaches:
+
+### Method 1: Using `BaseAssistantBridge` (Recommended OOP Approach)
+
+Inherit from `BaseAssistantBridge` to manage all states through an event-driven lifecycle:
+
+```python
+import time
+from assistant_overlay_gui import BaseAssistantBridge, start_overlay, OverlayConfig
+
+class MyVoiceAssistant(BaseAssistantBridge):
+    def run_cycle(self):
+        # 1. Listening mode
+        self.on_idle("🎙️ Listening...")
+        time.sleep(1)
+
+        # 2. User started speaking
+        self.on_user_speech_start("👤 User speaking...")
+        self.on_user_speech_chunk(audio_rms_volume=0.7, partial_transcript="How is the weather today?")
+        time.sleep(1.5)
+
+        # 3. LLM / Processing mode
+        self.on_processing_start("⚙️ Gemini generating response...")
+        time.sleep(1.5)
+
+        # 4. Assistant speaking (TTS)
+        self.on_assistant_speech_start(full_response_text="Today is sunny and 24 degrees.")
+        self.on_assistant_speech_chunk(audio_rms_volume=0.8)
+        time.sleep(2)
+
+        # 5. Return to standby
+        self.on_idle()
+
+if __name__ == "__main__":
+    hud = start_overlay()
+    assistant = MyVoiceAssistant(overlay=hud)
+    try:
+        assistant.run_cycle()
+    finally:
+        hud.stop()
+```
+
+---
+
+### Method 2: Direct Control via `OverlayController`
+
+Add simple, single-line calls directly inside your existing functional assistant code:
+
+```python
+from assistant_overlay_gui import start_overlay, OverlayConfig
+
+# Start the overlay
+config = OverlayConfig(width=240, height=180, margin_right=30, margin_top=40)
+hud = start_overlay(config=config)
+
+# Trigger states:
+hud.listening("🎙️ Waiting for wake word...")
+hud.user_speaking("👤 Listening...", volume=0.6, transcript="Shut down computer")
+hud.processing("⚙️ Executing command...")
+hud.assistant_speaking("🤖 Responding...", volume=0.8, transcript="Task completed.")
+hud.sleeping("💤 Entered sleep mode")
+hud.error("⚠️ Microphone connection error")
+
+# Feed live audio waveform volume (inside mic/speaker stream loops):
+hud.update_user_volume(0.85)       # Value between 0.0 and 1.0
+hud.update_assistant_volume(0.65)  # Value between 0.0 and 1.0
+
+# Shutdown
+hud.stop()
+```
+
+---
+
+## ⚙️ Configuration & Customization
+
+Customize the overlay dimensions, position, fonts, and colors using `OverlayConfig`:
+
+```python
+from assistant_overlay_gui import OverlayConfig, start_overlay
+
+custom_config = OverlayConfig(
+    width=260,                   # Width (px)
+    height=190,                  # Height (px)
+    margin_right=20,             # Margin from right edge of screen
+    margin_top=30,               # Margin from top edge of screen
+    border_radius=22,            # Rounded corner radius
+    fps=60,                      # Target frame rate
+    always_on_top=True,          # Keep window always on top
+    draggable=True,              # Enable dragging
+    title_font_family="Arial",   # Title font family
+    body_font_family="Helvetica" # Body/description font family
+)
+
+hud = start_overlay(config=custom_config)
+```
+
+### Defining Custom Color Themes:
+
+Define custom palettes and text labels for any state:
+
+```python
+custom_themes = {
+    "listening": {
+        "primary": "#00FF88",       # Vibrant Green
+        "secondary": "#009944",
+        "glow": "#00FF88",
+        "bg": "#0B1510",
+        "card_border": "#1A3322",
+        "title": "Ready",
+        "status_text": "🎙️ Listening...",
+        "badge_color": "#00FF88"
+    }
+}
+
+config = OverlayConfig(custom_themes=custom_themes)
+hud = start_overlay(config=config)
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+├── assistant_overlay_gui.py    # 60 FPS Tkinter GUI Engine, Multiprocessing, and Controller
+├── example_custom_assistant.py # Sample assistant lifecycle simulation
+├── 1.png - 5.png               # State preview screenshots
+├── README.md                   # Project documentation
+└── LICENSE                     # MIT License
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork this repository.
+2. Create your feature branch (`git checkout -b feature/NewFeature`).
+3. Commit your changes (`git commit -m 'feat: Add new visualizer mode'`).
+4. Push to the branch (`git push origin feature/NewFeature`).
+5. Open a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute it in your personal, open-source, or commercial projects.
