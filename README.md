@@ -30,3 +30,10 @@ A modern, transparent (glassmorphic), 60 FPS animated, and draggable floating HU
 • Visualizer: Real-time audio amplitude (RMS) waves and Aurora spectrum.
 • Features: Live subtitles & status badges, draggable, double-click reset, customizable color themes.
 • Platform: Cross-platform (macOS, Windows, Linux).
+
+<img width="252" height="195" alt="1" src="https://github.com/user-attachments/assets/12b12939-76a1-48c4-a9a9-365f7872388e" />
+<img width="252" height="195" alt="5" src="https://github.com/user-attachments/assets/653c2ba5-fa35-4762-b64c-2083f13b3439" />
+<img width="252" height="195" alt="4" src="https://github.com/user-attachments/assets/88b6afd6-e9bf-46b8-8715-d1214db583c4" />
+<img width="252" height="195" alt="3" src="https://github.com/user-attachments/assets/0c381d96-f3fd-4f79-827d-c9c0909ba8df" />
+<img width="252" height="195" alt="2" src="https://github.com/user-attachments/assets/6f45da56-c650-40f9-8933-3640f8e476aa" />
+
