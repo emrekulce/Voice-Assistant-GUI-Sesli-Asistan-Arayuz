@@ -6,9 +6,9 @@
 [![GUI](https://img.shields.io/badge/GUI-Tkinter%2060%20FPS-purple.svg?style=for-the-badge)]()
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Standard%20Library%20Only-orange.svg?style=for-the-badge)]()
 
-A modern, transparent (glassmorphic), 60 FPS animated, and draggable **Floating HUD Overlay** template designed for developers building their own AI Voice Assistants.
+A modern, transparent (glassmorphic), 60 FPS animated, and draggable Floating HUD Overlay template designed for developers building their own AI Voice Assistants.
 
-Built entirely with **Python standard libraries**. Thanks to its multiprocessing architecture (`multiprocessing`), the interface **never freezes (0ms lag)** while your assistant records audio, LLMs (Large Language Models) process thoughts, or text-to-speech (TTS) synthesizes voice in the background.
+Built entirely with Python standard libraries. Thanks to its multiprocessing architecture (`multiprocessing`), the interface never freezes (0ms lag) while your assistant records audio, LLMs (Large Language Models) process thoughts, or text-to-speech (TTS) synthesizes voice in the background.
 
 ---
 
@@ -17,31 +17,31 @@ Built entirely with **Python standard libraries**. Thanks to its multiprocessing
 | 1. Listening State | 2. User Speaking | 3. Processing |
 | :---: | :---: | :---: |
 | ![Listening](1.png) | ![User Speaking](2.png) | ![Processing](3.png) |
-| *Breathing pulse ring* | *Live RMS microphone equalizer* | *Orbital spinning thinking sphere* |
+| Breathing pulse ring | Live RMS microphone equalizer | Orbital spinning thinking sphere |
 
 | 4. Assistant Speaking | 5. Sleeping / Error Modes |
 | :---: | :---: |
 | ![Assistant Speaking](4.png) | ![Sleep Mode](5.png) |
-| *9-Band Aurora audio spectrum* | *Calm sleep & red alert icons* |
+| 9-Band Aurora audio spectrum | Calm sleep & red alert icons |
 
 ---
 
 ## ✨ Key Features
 
-- 💎 **Modern Glassmorphic Design:** Transparent windows, smooth rounded corners, pill status badges, and neon glow effects.
-- ⚡ **Zero-Lag & 60 FPS (Isolated Process):** The GUI runs in an independent background process (`multiprocessing`). Your API requests or heavy AI audio models will never affect UI fluidity.
-- 🔄 **6 Distinct Assistant States:**
+- 💎 Modern Glassmorphic Design: Transparent windows, smooth rounded corners, pill status badges, and neon glow effects.
+- ⚡ Zero-Lag & 60 FPS (Isolated Process): The GUI runs in an independent background process (`multiprocessing`). Your API requests or heavy AI audio models will never affect UI fluidity.
+- 🔄 6 Distinct Assistant States:
   1. `listening`: Standby / Waiting for wake-word.
   2. `user_speaking`: User microphone input active (Equalizer waves).
   3. `processing`: LLM inference, API requests, or tool execution.
   4. `assistant_speaking`: TTS audio output (Aurora spectrum).
   5. `sleeping`: Sleep / Quiet standby mode.
   6. `error`: Error / Connection timeout alert.
-- 🔊 **Live Audio Volume (RMS) Support:** Real-time visualizer that scales dynamically based on mic or speaker amplitude (`calculate_rms` included).
-- 💬 **Live Subtitles & Status Badges:** Displays spoken user transcripts or the currently executed tool (e.g. `🌦️ Checking Weather...`) in real-time.
-- 🖱️ **Always-on-Top & Draggable:** Can be repositioned anywhere on screen; double-clicking resets it to the top-right default position.
-- 🛠️ **Zero External Dependencies:** Built with Python's native `tkinter` library. No need to install external GUI frameworks (`PyQt`, `Pygame`, `Kivy`, etc.).
-- 💻 **Cross-Platform:** Full transparency and window management support across macOS, Windows, and Linux.
+- 🔊 Live Audio Volume (RMS) Support: Real-time visualizer that scales dynamically based on mic or speaker amplitude (`calculate_rms` included).
+- 💬 Live Subtitles & Status Badges: Displays spoken user transcripts or the currently executed tool (e.g. `🌦️ Checking Weather...`) in real-time.
+- 🖱️ Always-on-Top & Draggable: Can be repositioned anywhere on screen; double-clicking resets it to the top-right default position.
+- 🛠️ Zero External Dependencies: Built with Python's native `tkinter` library. No need to install external GUI frameworks (`PyQt`, `Pygame`, `Kivy`, etc.).
+- 💻 Cross-Platform: Full transparency and window management support across macOS, Windows, and Linux.
 
 ---
 
@@ -49,9 +49,9 @@ Built entirely with **Python standard libraries**. Thanks to its multiprocessing
 
 This overlay GUI is plug-and-play compatible with any speech/AI library:
 
-- **Speech-to-Text (STT):** OpenAI Whisper, Faster-Whisper, Vosk, Google Cloud Speech, AssemblyAI, SpeechRecognition
-- **Large Language Models (LLM):** Google Gemini Live / 1.5 Pro / Flash, OpenAI GPT-4o / Realtime API, Anthropic Claude, Ollama, DeepSeek
-- **Text-to-Speech (TTS):** ElevenLabs, Edge-TTS, Kokoro-TTS, gTTS, pyttsx3, Coqui-TTS
+- Speech-to-Text (STT): OpenAI Whisper, Faster-Whisper, Vosk, Google Cloud Speech, AssemblyAI, SpeechRecognition
+- Large Language Models (LLM): Google Gemini Live / 1.5 Pro / Flash, OpenAI GPT-4o / Realtime API, Anthropic Claude, Ollama, DeepSeek
+- Text-to-Speech (TTS): ElevenLabs, Edge-TTS, Kokoro-TTS, gTTS, pyttsx3, Coqui-TTS
 
 ---
 
@@ -67,12 +67,12 @@ cd ai-voice-assistant-overlay
 - Python 3.8 or higher.
 - No third-party packages required.
 
-*(Optional)* For high-performance audio RMS calculation, install `numpy`:
+(Optional) For high-performance audio RMS calculation, install `numpy`:
 ```bash
 pip install numpy
 ```
 
-*(For Linux Users)* If Tkinter is not installed on your system:
+(For Linux Users) If Tkinter is not installed on your system:
 ```bash
 sudo apt-get install python3-tk
 ```

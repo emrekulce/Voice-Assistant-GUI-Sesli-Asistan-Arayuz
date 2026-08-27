@@ -6,9 +6,9 @@
 [![GUI](https://img.shields.io/badge/GUI-Tkinter%2060%20FPS-purple.svg?style=for-the-badge)]()
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Standard%20Library%20Only-orange.svg?style=for-the-badge)]()
 
-Kendi yapay zeka sesli asistanını (AI Voice Assistant) geliştiren geliştiriciler için tasarlanmış; **modern, şeffaf (glassmorphic), 60 FPS animasyonlu ve sürükle-bırak destekli kayan arayüz (Floating HUD Overlay)** şablonu.
+Kendi yapay zeka sesli asistanını (AI Voice Assistant) geliştiren geliştiriciler için tasarlanmış; modern, şeffaf (glassmorphic), 60 FPS animasyonlu ve sürükle-bırak destekli kayan arayüz (Floating HUD Overlay) şablonu.
 
-Tamamen **Python standart kütüphaneleriyle** geliştirilmiştir. Çoklu işlemci mimarisi (`multiprocessing`) sayesinde asistanınız arka planda ses kaydederken, LLM (Büyük Dil Modeli) düşünürken veya ses sentezlerken (TTS) arayüz **asla donmaz (0ms lag)**.
+Tamamen Python standart kütüphaneleriyle geliştirilmiştir. Çoklu işlemci mimarisi (`multiprocessing`) sayesinde asistanınız arka planda ses kaydederken, LLM (Büyük Dil Modeli) düşünürken veya ses sentezlerken (TTS) arayüz asla donmaz (0ms lag).
 
 ---
 
@@ -17,31 +17,31 @@ Tamamen **Python standart kütüphaneleriyle** geliştirilmiştir. Çoklu işlem
 | 1. Dinleme Durumu (Listening) | 2. Kullanıcı Konuşuyor (User Speaking) | 3. İşlem Yapılıyor (Processing) |
 | :---: | :---: | :---: |
 | ![Dinliyor](1.png) | ![Kullanıcı Konuşuyor](2.png) | ![Düşünüyor](3.png) |
-| *Nefes alan nabız halkası* | *Canlı RMS mikrofon equalizer'ı* | *Orbital dönen düşünme küresi* |
+| Nefes alan nabız halkası | Canlı RMS mikrofon requalizer'ı | Orbital dönen düşünme küresi |
 
 | 4. Asistan Konuşuyor (Assistant Speaking) | 5. Uyku / Hata Modları (Sleeping / Error) |
 | :---: | :---: |
 | ![Asistan Konuşuyor](4.png) | ![Uyku Modu](5.png) |
-| *9-Bantlı Aurora ses spektrumu* | *Dingin uyku & kırmızı uyarı ikonları* |
+| 9-Bantlı Aurora ses spektrumu | Dingin uyku & kırmızı uyarı ikonları |
 
 ---
 
 ## ✨ Öne Çıkan Özellikler
 
-- 💎 **Modern Glassmorphic Tasarım:** Şeffaf pencereler, yumuşak yuvarlatılmış köşeler, durum rozetleri (pill badge) ve neon ışıma efektleri.
-- ⚡ **Zero-Lag & 60 FPS (İzole Süreç):** GUI, arka plandaki bağımsız bir süreçte (`multiprocessing`) çalışır. API istekleriniz veya ağır ses modelleriniz arayüzün akıcılığını etkilemez.
-- 🔄 **6 Farklı Asistan Durumu:**
+- 💎 Modern Glassmorphic Tasarım: Şeffaf pencereler, yumuşak yuvarlatılmış köşeler, durum rozetleri (pill badge) ve neon ışıma efektleri.
+- ⚡ Zero-Lag & 60 FPS (İzole Süreç): GUI, arka plandaki bağımsız bir süreçte (`multiprocessing`) çalışır. API istekleriniz veya ağır ses modelleriniz arayüzün akıcılığını etkilemez.
+- 🔄 6 Farklı Asistan Durumu:
   1. `listening`: Standby / Uyandırma kelimesi (Wake-word) bekleme.
   2. `user_speaking`: Kullanıcı mikrofon girişi aktif (Equalizer dalgaları).
   3. `processing`: LLM çıkarımı, API istekleri veya araç (tool) çalıştırma.
   4. `assistant_speaking`: TTS ses çıkışı (Aurora spektrumu).
   5. `sleeping`: Uyku / Sessiz bekleme modu.
   6. `error`: Hata / Bağlantı zaman aşımı uyarısı.
-- 🔊 **Canlı Ses Şiddeti (RMS) Desteği:** Mikrofon veya hoparlör ses genliğine göre gerçek zamanlı büyüyüp küçülen dinamik görselleştirici (`calculate_rms` dahildir).
-- 💬 **Canlı Altyazı & Durum Rozeti:** Kullanıcının söylediği sözleri veya o anda çağrılan aracı (örn. `🌦️ Hava Durumu Sorgulanıyor...`) anlık olarak görüntüler.
-- 🖱️ **Taşınabilir & Her Zaman Üstte (Always-on-Top & Draggable):** Ekranın istenilen yerine sürüklenebilir; çift tıklama ile sağ üst köşedeki orijinal konumuna geri döner.
-- 🛠️ **Sıfır Dış Bağımlılık:** Python'ın dahili `tkinter` kütüphanesini kullanır. Ekstra bir GUI kütüphanesi (`PyQt`, `Pygame`, `Kivy` vb.) kurmanıza gerek yoktur.
-- 💻 **Çapraz Platform:** macOS, Windows ve Linux işletim sistemlerinde pencere şeffaflığıyla tam uyumlu çalışır.
+- 🔊 Canlı Ses Şiddeti (RMS) Desteği: Mikrofon veya hoparlör ses genliğine göre gerçek zamanlı büyüyüp küçülen dinamik görselleştirici (`calculate_rms` dahildir).
+- 💬 Canlı Altyazı & Durum Rozeti: Kullanıcının söylediği sözleri veya o anda çağrılan aracı (örn. `🌦️ Hava Durumu Sorgulanıyor...`) anlık olarak görüntüler.
+- 🖱️ Taşınabilir & Her Zaman Üstte (Always-on-Top & Draggable): Ekranın istenilen yerine sürüklenebilir; çift tıklama ile sağ üst köşedeki orijinal konumuna geri döner.
+- 🛠️ Sıfır Dış Bağımlılık: Python'ın dahili `tkinter` kütüphanesini kullanır. Ekstra bir GUI kütüphanesi (`PyQt`, `Pygame`, `Kivy` vb.) kurmanıza gerek yoktur.
+- 💻 Çapraz Platform: macOS, Windows ve Linux işletim sistemlerinde pencere şeffaflığıyla tam uyumlu çalışır.
 
 ---
 
@@ -49,9 +49,9 @@ Tamamen **Python standart kütüphaneleriyle** geliştirilmiştir. Çoklu işlem
 
 Bu arayüz herhangi bir ses/yapay zeka kütüphanesiyle tak-çalıştır şeklinde uyumludur:
 
-- **Ses Tanıma (STT):** OpenAI Whisper, Faster-Whisper, Vosk, Google Cloud Speech, AssemblyAI, SpeechRecognition
-- **Yapay Zeka Modelleri (LLM):** Google Gemini Live / 1.5 Pro / Flash, OpenAI GPT-4o / Realtime API, Anthropic Claude, Ollama, DeepSeek
-- **Ses Sentezi (TTS):** ElevenLabs, Edge-TTS, Kokoro-TTS, gTTS, pyttsx3, Coqui-TTS
+- Ses Tanıma (STT): OpenAI Whisper, Faster-Whisper, Vosk, Google Cloud Speech, AssemblyAI, SpeechRecognition
+- Yapay Zeka Modelleri (LLM): Google Gemini Live / 1.5 Pro / Flash, OpenAI GPT-4o / Realtime API, Anthropic Claude, Ollama, DeepSeek
+- Ses Sentezi (TTS): ElevenLabs, Edge-TTS, Kokoro-TTS, gTTS, pyttsx3, Coqui-TTS
 
 ---
 
@@ -67,12 +67,12 @@ cd ai-voice-assistant-overlay
 - Python 3.8 veya üzeri.
 - Herhangi bir üçüncü parti kütüphane zorunlu değildir.
 
-*(İsteğe bağlı)* Ses RMS hesaplamalarında yüksek performans için `numpy` kurabilirsiniz:
+(İsteğe bağlı) Ses RMS hesaplamalarında yüksek performans için `numpy` kurabilirsiniz:
 ```bash
 pip install numpy
 ```
 
-*(Linux Kullanıcıları İçin)* Eğer sisteminizde Tkinter kurulu değilse:
+(Linux Kullanıcıları İçin) Eğer sisteminizde Tkinter kurulu değilse:
 ```bash
 sudo apt-get install python3-tk
 ```
